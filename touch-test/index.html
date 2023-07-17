@@ -19,10 +19,37 @@
         transform: translate(-50%, -50%);
     }
 
-    #top-half {
-        background-color: black;
-        height: 400px;
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
     }
+
+    #top-half {
+        background-color: rgb(255, 153, 36);
+        border-radius: 25px;
+        height: 75vw;
+        width: 100vw;
+        transition: border-radius 0.2s;
+    }
+
+    .circle {
+        background-color: magenta;
+        width: 25vw;
+        height: 25vw;
+        border-radius: 50%;
+        transition: transform 2s;
+    }
+
+    /* Added a new flex container for circles */
+    #circle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 
     body{
         margin: 0;
@@ -30,6 +57,14 @@
 </style>
 
 <body>
-    <div id="top-half"></div>
+    <div id="container">
+        <div id="top-half"></div>
+        <div id="circle-container">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </div>
 </body>
 </html>

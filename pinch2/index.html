@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Touch Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'> -->
+    <script src='script.js'></script>
+</head>
+
+<style>
+
+body {
+  overflow: hidden;
+}
+
+
+#container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: pinkwhite;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    background-color: blue;
+    border-radius: 50%;
+}
+
+
+.barrier {
+    position: absolute;
+    width: 30%;
+    height: 10px;
+    background-color: black;
+}
+</style>
+
+<body>
+    <div id="container">
+        <div id="circle1" class="circle"></div>
+        <div id="circle2" class="circle"></div>
+        <div class="barrier"></div>
+        <div class="barrier"></div>
+        <div class="barrier"></div>
+        <div class="barrier"></div>
+        <div class="barrier"></div>
+    </div>
+</body>
