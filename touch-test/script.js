@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function(){
     let topHalf = document.getElementById("top-half");
     let circles = document.getElementsByClassName("circle");
@@ -38,3 +39,20 @@ document.addEventListener("DOMContentLoaded", function(){
         console.log("end")
     })
 });
+=======
+// document.addEventListener("touchstart", e => {
+//     console.log("start")
+// });
+
+// document.addEventListener("touchmove", e => {
+//     console.log("move")
+// });
+
+// document.addEventListener("touchend", e => {
+//     console.log("end")
+// });
+
+document.addEventListener('click', e => {
+    console.log("clicked")
+});
+>>>>>>> da5dc09a297c6c26aa261cbc747b2ebdd1354284
