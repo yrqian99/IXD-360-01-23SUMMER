@@ -11,20 +11,12 @@ document.addEventListener("DOMContentLoaded", function(){
     let circle1Pos = { x: containerRect.right - circleRadius*2, y: containerRect.top}; // upper right corner
     let circle2Pos = { x: containerRect.left, y: containerRect.bottom - circleRadius*2 }; // bottom left corner
 
-    let barriers = Array.from(document.querySelectorAll('.barrier'));
-
-    // Scatter the barriers relatively centered throughout the container
-    for (let i = 0; i < barriers.length; i++) {
-        let barrier = barriers[i];
-        barrier.style.top = `${Math.random() * 40 + 30}%`; // Random value between 30% and 70%
-        barrier.style.left = `${Math.random() * 40 + 30}%`; // Random value between 30% and 70%
-    }
 
     // Position the circles in their initial locations
     circle1.style.left = circle1Pos.x + "px";
     circle1.style.top = circle1Pos.y + "px";
     circle2.style.left = circle2Pos.x + "px";
-    circle2.style.top = circle2Pos.y + "px";
+    circle2.style.top = circle2Pos.y - 2* circleRadius + "px";
 
     // Listen for touchmove events
     container.addEventListener("touchmove", function (event) {
@@ -41,12 +33,8 @@ document.addEventListener("DOMContentLoaded", function(){
             circle2.style.left = circle2Pos.x + "px";
             circle2.style.top = circle2Pos.y + "px";
 
-            // Check for barrier collision
-            if (barriers.some(barrier => checkBarrierCollision(circle1Pos, barrier) || checkBarrierCollision(circle2Pos, barrier))) {
-                container.style.backgroundColor = "black";
-            }
             // Check for circle collision
-            else if (checkCircleCollision(circle1Pos, circle2Pos)) {
+            if (checkCircleCollision(circle1Pos, circle2Pos)) {
                 container.style.backgroundColor = "red";
             } else {
                 container.style.backgroundColor = "white";
@@ -60,11 +48,5 @@ document.addEventListener("DOMContentLoaded", function(){
         return Math.hypot(pos1.x - pos2.x, pos1.y - pos2.y) <= 2*circleRadius;
     }
 
-    // Function to check if a circle is colliding with a barrier
-    function checkBarrierCollision(circlePos, barrier) {
-        let barrierRect = barrier.getBoundingClientRect();
-        return circlePos.x < barrierRect.right && circlePos.x + 2*circleRadius > barrierRect.left &&
-               circlePos.y < barrierRect.bottom && circlePos.y + 2*circleRadius > barrierRect.top;
-    }
 
 });

@@ -10,40 +10,24 @@
 </head>
 
 <style>
-
 body {
-  overflow: hidden;
-}
-
-
-#container {
-    position: relative;
     height: 100vh;
-    width: 100vw;
-    background-color: pinkwhite;
-    overflow: hidden;
+    margin: 0;
+    background: radial-gradient(circle at center, red 1%, pink 5% , white 10%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .circle {
-    position: absolute;
-    height: 100px;
-    width: 100px;
-    background-color: red;
+    width: 3vw;
+    height: 3vw;
     border-radius: 50%;
+    background: red;
 }
 
-
-.barrier {
-    position: absolute;
-    width: 30%;
-    height: 10px;
-    background-color: black;
-}
 </style>
 
 <body>
-    <div id="container">
-        <div id="circle1" class="circle"></div>
-        <div id="circle2" class="circle"></div>
-    </div>
+    <div class="circle"></div>
 </body>
