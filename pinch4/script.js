@@ -47,16 +47,66 @@ document.addEventListener("DOMContentLoaded", function() {
             let whiteNormalizedDistance = initialPinkStop + (initialWhiteStop - initialPinkStop) * ((distance - minDistance) / (maxDistance - minDistance));
 
             // Set the color stop for the radial gradient
-            container.style.background = `radial-gradient(circle at center, red 1%, pink ${normalizedDistance}%, white ${whiteNormalizedDistance}%)`;
-
+            container.style.background = `radial-gradient(circle at center, rgba(248, 75, 75, 0.956) 1%, rgb(246, 196, 185) ${normalizedDistance}% , rgb(255, 223, 211) ${whiteNormalizedDistance}%)`;
             console.log(`Normalized distance for gradient (pink color stop): ${normalizedDistance}%`);
             console.log(`Normalized distance for gradient (white color stop): ${whiteNormalizedDistance}%`);
+
+            // Check for collision
+            if (checkCircleCollision(circle1Pos, circle2Pos, circleRadius)) {
+                triggerBloodEffect((circle1Pos.x + circle2Pos.x) / 2, (circle1Pos.y + circle2Pos.y) / 2);
+            }
         }
     });
 
     // Function to check if the two circles are colliding
     function checkCircleCollision(pos1, pos2, radius) {
         // Since the circles have a radius of 37.5, we'll check if the distance between their centers is less than their combined diameters
-        return Math.hypot(pos1.x - pos2.x, pos1.y - pos2.y) <= 4*radius;
+        let collide = Math.hypot(pos1.x - pos2.x, pos1.y - pos2.y) <= 3*radius;
+        return collide;
+    }
+
+    // Function to trigger the blood exploding effect
+    function triggerBloodEffect(x, y) {
+        for (let i = 0; i < 50; i++) {
+            // Create a new blood particle
+            let particle = document.createElement("div");
+
+            // Style the particle as a small, red circle
+            particle.style.position = "absolute";
+            particle.style.width = "8px";
+            particle.style.height = "8px";
+            particle.style.borderRadius = "50%";
+            particle.style.backgroundColor = "rgba(247, 98, 98, 0.5)";
+            
+            // Position the particle at the collision point
+            particle.style.left = x + "px";
+            particle.style.top = y + "px";
+
+            // Append the particle to the body of the document
+            document.body.appendChild(particle);
+            
+            // Animate the particle to move outwards in a random direction
+            let angle = Math.random() * 2 * Math.PI;
+            let speed = Math.random() * 50;
+            let vx = speed * Math.cos(angle);
+            let vy = speed * Math.sin(angle);
+
+            let particleAnimation = particle.animate([
+                // keyframes
+                { transform: `translate(0, 0)` },
+                { transform: `translate(${vx}px, ${vy}px)` }
+            ], { 
+                // timing options
+                duration: 1000,
+                iterations: 1,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+
+            // Remove the particle once the animation is done
+            particleAnimation.onfinish = function() {
+                particle.remove();
+            };
+        }
     }
 });
