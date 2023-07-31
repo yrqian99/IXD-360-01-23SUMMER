@@ -196,13 +196,13 @@ window.onload = function() {
   var svgCanvasHeight = svgCanvas.getBoundingClientRect().height;
 
   // Define the vertical space between the paths
-  var verticalSpace = 1;
+  var verticalSpace = 5;
 
   // Calculate how many paths to create
   var numPaths = Math.floor(svgCanvasHeight / verticalSpace) + 12 ;
 
   // Define the slope of the curve
-  var curveSlope = 200;
+  var curveSlope = 300;
 
   // Add a randomizeFactor
   var randomizeFactor = (Math.random() - 0.5) * 2; // -1 to 1
