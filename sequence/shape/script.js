@@ -94,9 +94,9 @@ window.onload = function() {
 
 
           // Interpolate each RGB channel separately
-          var r = Math.floor(interpolate(255, 2, (1 - normalizedDistance)));
-          var g = Math.floor(interpolate(255, 115, (1 - normalizedDistance)));
-          var b = Math.floor(interpolate(255, 168, (1 - normalizedDistance)));
+          var r = Math.floor(interpolate(0, 255, (1 - normalizedDistance)));
+          var g = Math.floor(interpolate(0, 255, (1 - normalizedDistance)));
+          var b = Math.floor(interpolate(0, 255, (1 - normalizedDistance)));
 
           currentBGColor = `rgba(${r}, ${g}, ${b}, 1)`;
           document.body.style.backgroundColor = currentBGColor;

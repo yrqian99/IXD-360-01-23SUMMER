@@ -38,10 +38,10 @@ window.onload = function() {
   var paths = [];
   for (var i = 0; i < numPaths; i++) {
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('stroke', 'white');
+    path.setAttribute('stroke', 'rgba(241, 247, 225, 0.8)');
     path.setAttribute('fill', 'transparent');
     path.setAttribute('stroke-width', '3');
-    path.setAttribute('stroke-dasharray', '3, 10');
+    // path.setAttribute('stroke-dasharray', '3, 10');
     svgCanvas.appendChild(path);
     paths.push(path);
   }
@@ -51,7 +51,7 @@ window.onload = function() {
 
       //create a gradient of line widths
       paths.forEach(function(path, i) {
-      var strokeWidth = i * 0.1; 
+      var strokeWidth = i * 0.08; 
       path.setAttribute('stroke-width', strokeWidth);
 
       var yOffset = i * verticalSpace;
