@@ -38,7 +38,7 @@ window.onload = function() {
     var opacity = 0.2;
 
     //default strokeOpacity
-    var strokeOpacity = 0.4
+    var strokeOpacity = 0.4;
   
     // Create the paths
     var paths = [];
@@ -93,7 +93,7 @@ window.onload = function() {
     });
   
 
-    var HOST = "192.168.1.66";
+    var HOST = "172.20.10.8";
 
     document.body.addEventListener("touchmove", function(e) {
 

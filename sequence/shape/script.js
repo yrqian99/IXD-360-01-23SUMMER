@@ -13,16 +13,16 @@ window.onload = function() {
   
     var svgCanvasHeight = svgCanvas.getBoundingClientRect().height;
   
-    var verticalSpace = 30;
+    var verticalSpace = 50;
   
     var numPaths = Math.floor(svgCanvasHeight / verticalSpace) + 11 ;
   
-    var curveSlope = 40;
+    var curveSlope = 200;
   
     var randomizeFactor = (Math.random() - 0.5) * 2;
     
-    var stopOpacity1 = 0.5; // default stop opacity for stop1
-    var stopOpacity2 = 0.05; // default stop opacity for stop2
+    var stopOpacity1 = 0.8; // default stop opacity for stop1
+    var stopOpacity2 = 0.2; // default stop opacity for stop2
     
 
 
@@ -74,6 +74,7 @@ window.onload = function() {
   }
 
 
+    var HOST = "172.20.10.8";
   
     document.body.addEventListener("touchmove", function(e) {
   
@@ -89,8 +90,8 @@ window.onload = function() {
           var normalizedDistance = Math.min(Math.abs(dx) / svgCanvasWidth, 1);
           
           
-          stopOpacity1 = 0.5 + (1 - normalizedDistance)* 0.2;
-          stopOpacity2 = 0.05 + (1 - normalizedDistance)* 0.2;
+          stopOpacity1 = 0.8 + (1 - normalizedDistance)* 0.2;
+          stopOpacity2 = 0.2 + (1 - normalizedDistance)* 0.2;
 
 
           // Interpolate each RGB channel separately
@@ -112,7 +113,15 @@ window.onload = function() {
               controlPoint1 = Math.min(Math.max(0, e.touches[1].clientX + offset1), svgCanvasWidth / 2);
               controlPoint2 = Math.min(Math.max(svgCanvasWidth / 2, e.touches[0].clientX + offset2), svgCanvasWidth);
           }
-  
+
+          if(normalizedDistance === 0){
+            console.log('Normalized distance is zero, starting delay.');
+            setTimeout(function() {
+                console.log('Delay over, starting redirect.');
+                window.location.href = `http://${HOST}:5500/sequence/dotted/index.html`;
+            }, 2000);
+          }
+    
           updatePaths();
 
         //   //jump to page 8 to create sequence

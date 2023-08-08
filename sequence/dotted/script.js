@@ -33,12 +33,19 @@ window.onload = function() {
   
     // Add a randomizeFactor
     var randomizeFactor = (Math.random() - 0.5) * 2; // -1 to 1
+
+    //declare stroke colorRGB
+
+    var rs = 0;
+    var bs = 0;
+    var gs = 0;
+
   
     // Create the paths
     var paths = [];
     for (var i = 0; i < numPaths; i++) {
       var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('stroke', 'rgba(241, 247, 225, 0.8)');
+      path.setAttribute('stroke', 'rgba(255, 0, 0, 0.8)');
       path.setAttribute('fill', 'transparent');
       path.setAttribute('stroke-width', '2');
       path.setAttribute('stroke-dasharray', '1, 10');
@@ -54,6 +61,7 @@ window.onload = function() {
         paths.forEach(function(path, i) {
         var strokeWidth = i * 0.05; 
         path.setAttribute('stroke-width', strokeWidth);
+        path.setAttribute('stroke', `rgba(${rs}, ${bs}, ${gs}, 0.8)`);
 
   
         var yOffset = i * verticalSpace;
@@ -64,7 +72,12 @@ window.onload = function() {
       });
     }
   
-  
+     // Interpolation function
+     function interpolate(start, end, factor) {
+      return start + (end - start) * factor;
+  }
+
+
     // Assign the touch events
     document.body.addEventListener("touchstart", function(e) {
       if (e.touches.length > 1) {
@@ -86,12 +99,24 @@ window.onload = function() {
     });
   
 
-    var HOST = "192.168.1.66";
+    var HOST = "172.20.10.8";
 
     document.body.addEventListener("touchmove", function(e) {
       if (e.touches.length > 1) {
         var dx = controlPoint2 - controlPoint1;
         var normalizedDistance = Math.min(Math.abs(dx) / svgCanvasWidth, 1);
+
+        // Interpolate each RGB channel separately
+        var r = Math.floor(interpolate(255, 0, (1 - normalizedDistance)));
+        var g = Math.floor(interpolate(255, 0, (1 - normalizedDistance)));
+        var b = Math.floor(interpolate(255, 0, (1 - normalizedDistance)));
+
+        rs = 255 - r;
+        gs = 255 - g;
+        bs = 255 - b;
+
+        currentBGColor = `rgba(${r}, ${g}, ${b}, 1)`;
+        document.body.style.backgroundColor = currentBGColor;
 
           if (e.touches[0].clientX < e.touches[1].clientX) {
               // touch[0] is on the left

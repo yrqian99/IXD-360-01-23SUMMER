@@ -23,13 +23,17 @@ window.onload = function() {
     var svgCanvasHeight = svgCanvas.getBoundingClientRect().height;
   
     // Define the vertical space between the paths
-    var verticalSpace = 55;
+    var verticalSpace = 120;
   
     // Calculate how many paths to create
     var numPaths = Math.floor(svgCanvasHeight / verticalSpace) + 26 ;
   
     // Define the slope of the curve
-    var curveSlope = 350;
+    var curveSlope = 260;
+
+    //declare linewight variable
+    var strokeWeight = 0.5;
+    var strokeLength = 100;
   
     // Add a randomizeFactor
     var randomizeFactor = (Math.random() - 0.5) * 2; // -1 to 1
@@ -38,10 +42,10 @@ window.onload = function() {
     var paths = [];
     for (var i = 0; i < numPaths; i++) {
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('stroke', 'rgba(241, 247, 225, 0.8)');
-    path.setAttribute('fill', 'transparent');
-    path.setAttribute('stroke-width', '200');
-    path.setAttribute('stroke-dasharray', '1 30');
+    path.setAttribute('stroke', 'rgba(241, 247, 225, 0.6)');
+    path.setAttribute('fill', 'rgba(241, 247, 225, 0.02)');
+    path.setAttribute('stroke-width', '100');
+    path.setAttribute('stroke-dasharray', '0.5 30');
     // path.setAttribute('stroke-dasharray', '3, 10');
     svgCanvas.appendChild(path);
     paths.push(path);
@@ -58,6 +62,8 @@ window.onload = function() {
         var yOffset = i * verticalSpace;
         var randomYOffset = yOffset + randomizeFactor;
         path.setAttribute('d', `M0 ${yOffset + randomYOffset} Q${controlPoint1} ${yOffset} ${svgCanvasWidth / 2 } ${yOffset - curveSlope} Q${controlPoint2} ${yOffset} ${svgCanvasWidth} ${yOffset+ randomYOffset}`);
+        path.setAttribute('stroke-dasharray',`${strokeWeight} 30`);
+        path.setAttribute('stroke-width', `${strokeLength}`)
         // path.setAttribute('d', `M0 ${yOffset} Q${controlPoint1} ${yOffset} ${svgCanvasWidth / 2} ${yOffset - curveSlope} Q${controlPoint2} ${yOffset} ${svgCanvasWidth} ${yOffset}`);
         // path.setAttribute('d', `M0 ${yOffset} Q${controlPoint1} ${yOffset} 120 ${yOffset - 70} Q${controlPoint2} ${yOffset} 230 ${yOffset}`);
     });
@@ -85,14 +91,20 @@ window.onload = function() {
     });
   
 
-    var HOST = "192.168.1.66";
+    var HOST = "172.20.10.8";
 
     document.body.addEventListener("touchmove", function(e) {
+
 
 
       if (e.touches.length > 1) {
         var dx = controlPoint2 - controlPoint1;
         var normalizedDistance = Math.min(Math.abs(dx) / svgCanvasWidth, 1);
+
+
+        strokeWeight = 0.5 + (1 - normalizedDistance) * 2;
+        strokeLength = 100 + (1 - normalizedDistance) * 300;
+        console.log(strokeWeight);
 
           if (e.touches[0].clientX < e.touches[1].clientX) {
               // touch[0] is on the left
@@ -111,7 +123,7 @@ window.onload = function() {
     //   }
   
 
-    console.log(normalizedDistance)
+    // console.log(normalizedDistance)
     if(normalizedDistance === 0){
       console.log('Normalized distance is zero, starting delay.');
       setTimeout(function() {
