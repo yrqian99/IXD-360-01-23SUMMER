@@ -99,7 +99,9 @@ window.onload = function() {
     });
   
 
-    var HOST = "172.20.10.8";
+    // var HOST = "172.20.10.8";
+    var HOST = "192.168.1.66";
+    
 
     document.body.addEventListener("touchmove", function(e) {
       if (e.touches.length > 1) {
@@ -141,7 +143,7 @@ window.onload = function() {
         console.log('Normalized distance is zero, starting delay.');
         setTimeout(function() {
             console.log('Delay over, starting redirect.');
-            window.location.href = `http://${HOST}:5500/sequence/dotLine/index.html`;
+            window.location.href = `http://${HOST}:5500/sequence/dotLine1/index.html`;
         }, 2000);
     }
       updatePaths();

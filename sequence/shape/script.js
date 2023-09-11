@@ -74,7 +74,8 @@ window.onload = function() {
   }
 
 
-    var HOST = "172.20.10.8";
+    // var HOST = "172.20.10.8";
+    var HOST = "192.168.1.66";
   
     document.body.addEventListener("touchmove", function(e) {
   
